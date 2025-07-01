@@ -1,0 +1,17 @@
+FROM python:3.10-slim
+
+WORKDIR /usr/src/workspace/guessgame-api
+
+COPY . .
+
+RUN pip config --user set global.progress_bar off
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+EXPOSE 5000
+
+ENV FLASK_APP=run.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+#CMD ["flask", "run", "--host=0.0.0.0"]
+
+CMD ["./start-backend.sh"]
